@@ -9,11 +9,13 @@
 	}
 }
 .wrapperPanel {
+	margin-top: 20px;
 	margin-left: 20px;
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: column;
-	background-color: black;
+	background-color: rgba(255, 255, 255, 0.795);
+
 	max-width: 247px;
 	height: 488px;
 	border-radius: 20px;
@@ -22,12 +24,15 @@
 		align-items: center;
 		justify-content: space-between;
 		max-width: 150px;
+		margin-left: 15px;
+		margin-top: 10px;
 		color: #2d3748;
 
 		span {
 			font-size: 14px;
 			font-family: 'M PLUS Rounded 1c', sans-serif;
 			font-weight: 700;
+			font-style: normal;
 		}
 	}
 }

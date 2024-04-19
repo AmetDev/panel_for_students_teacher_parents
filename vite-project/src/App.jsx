@@ -1,13 +1,10 @@
-import { useState } from 'react'
 import '../src/scss/index.scss'
-import PanelAdmin from './components/Panel/IsAdmin/PanelAdmin'
+import TeacherPanel from './pages/Teacher/TeacherPanel'
 
 function App() {
-	const [count, setCount] = useState(0)
-
 	return (
 		<>
-			<PanelAdmin />
+			<TeacherPanel />
 		</>
 	)
 }
