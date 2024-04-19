@@ -4,28 +4,28 @@ import Cookies from 'js-cookie'
 
 export const fetchUser = createAsyncThunk('me/fetchMeStatus', async obj => {
 	if (obj.teacherState) {
-		const { data } = await axios.post(
-			`${import.meta.env.MY_KEY}/auth_teacher/login`,
-			{ email: obj.email, password: obj.password }
-		)
+		const { data } = await axios.post(`${__VALUE__}/auth_teacher/login`, {
+			email: obj.email,
+			password: obj.password,
+		})
 
 		Cookies.set('token', data.token, { expires: 7 })
 		return data
 	}
 	if (obj.parentState) {
-		const { data } = await axios.post(
-			`${import.meta.env.MY_KEY}/auth_parent/login`,
-			{ email: obj.email, password: obj.password }
-		)
+		const { data } = await axios.post(`${__VALUE__}/auth_parent/login`, {
+			email: obj.email,
+			password: obj.password,
+		})
 
 		Cookies.set('token', data.token, { expires: 7 })
 		return data
 	}
 	if (obj.studentState) {
-		const { data } = await axios.post(
-			`${import.meta.env.MY_KEY}/auth_student/login`,
-			{ email: obj.email, password: obj.password }
-		)
+		const { data } = await axios.post(`${__VALUE__}/auth_student/login`, {
+			email: obj.email,
+			password: obj.password,
+		})
 
 		Cookies.set('token', data.token, { expires: 7 })
 

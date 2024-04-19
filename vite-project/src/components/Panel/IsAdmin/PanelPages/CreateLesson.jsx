@@ -49,14 +49,11 @@ const CreateLesson = () => {
 			try {
 				const token = await Cookies.get('token')
 
-				const { data } = await axios.get(
-					`http://localhost:4444/auth_teacher/me`,
-					{
-						headers: {
-							Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIwZmQwNWVhNWY3YWRiNDMzYjg4OTYiLCJpYXQiOjE3MTM1MTE4NTAsImV4cCI6MTcxNjEwMzg1MH0.X2eYUjgR4w5OmyK-UxvyEqScPa1FXqee1q6t4YLF4lI`,
-						},
-					}
-				)
+				const { data } = await axios.get(`${__VALUE__}/auth_teacher/me`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
 
 				setDataFetch(data)
 			} catch (error) {
@@ -579,21 +576,17 @@ const CreateLesson = () => {
 			formData.append('image', file)
 			const token = await Cookies.get('token')
 			console.log(formData)
-			const { data } = await axios.post(
-				`http://localhost:4444/upload`,
-				formData,
-				{
-					headers: {
-						'Access-Control-Allow-Origin': '*',
-						Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIwZmQwNWVhNWY3YWRiNDMzYjg4OTYiLCJpYXQiOjE3MTM1MTE4NTAsImV4cCI6MTcxNjEwMzg1MH0.X2eYUjgR4w5OmyK-UxvyEqScPa1FXqee1q6t4YLF4lI`,
-					},
-				}
-			)
+			const { data } = await axios.post(`${__VALUE__}/upload`, formData, {
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					Authorization: `Bearer ${token}`,
+				},
+			})
 			console.log(data.imagelink)
 			setDataUrl(data.imagelink)
 			setImageContentUrl(
 				`<img style="max-width:100%, height: auto;" src=${
-					`http://localhost:4444` + `${data.imagelink}`
+					`${__VALUE__}` + `${data.imagelink}`
 				}  alt="name"/>`
 			)
 		} catch (err) {
@@ -608,18 +601,14 @@ const CreateLesson = () => {
 			formData.append('file', file)
 
 			const token = await Cookies.get('token')
-			const { data } = await axios.post(
-				`http://localhost:4444/uploadpdf`,
-				formData,
-				{
-					headers: {
-						'Access-Control-Allow-Origin': '*',
-						Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIwZmQwNWVhNWY3YWRiNDMzYjg4OTYiLCJpYXQiOjE3MTM1MTE4NTAsImV4cCI6MTcxNjEwMzg1MH0.X2eYUjgR4w5OmyK-UxvyEqScPa1FXqee1q6t4YLF4lI`,
-					},
-				}
-			)
+			const { data } = await axios.post(`${__VALUE__}/uploadpdf`, formData, {
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					Authorization: `Bearer ${token}`,
+				},
+			})
 
-			addLinkFile(`http://localhost:4444/${data.pdflink}`)
+			addLinkFile(`${__VALUE__}/${data.pdflink}`)
 		} catch (err) {
 			console.log(err)
 		}
@@ -657,7 +646,7 @@ const CreateLesson = () => {
 					const token = await Cookies.get('token')
 					await axios
 						.post(
-							`http://localhost:4444/page/create`,
+							`${__VALUE__}/page/create`,
 
 							{
 								data,
@@ -672,7 +661,7 @@ const CreateLesson = () => {
 							{
 								headers: {
 									'Access-Control-Allow-Origin': '*',
-									Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIwZmQwNWVhNWY3YWRiNDMzYjg4OTYiLCJpYXQiOjE3MTM1MTE4NTAsImV4cCI6MTcxNjEwMzg1MH0.X2eYUjgR4w5OmyK-UxvyEqScPa1FXqee1q6t4YLF4lI`,
+									Authorization: `Bearer ${token}`,
 								},
 							}
 						)
@@ -723,13 +712,14 @@ const CreateLesson = () => {
 			console.log('resultText', resultText)
 
 			const cleanedHtml = removeLocalhostFromHref(resultText)
+
 			const someDate = await axios.put(
-				`http://localhost:4444/page/topublic`,
+				`${__VALUE__}/page/topublic`,
 				{ URLPage, textValue: cleanedHtml },
 				{
 					headers: {
 						'Access-Control-Allow-Origin': '*',
-						Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIwZmQwNWVhNWY3YWRiNDMzYjg4OTYiLCJpYXQiOjE3MTM1MTE4NTAsImV4cCI6MTcxNjEwMzg1MH0.X2eYUjgR4w5OmyK-UxvyEqScPa1FXqee1q6t4YLF4lI`,
+						Authorization: `Bearer ${token}`,
 					},
 				}
 			)
@@ -756,16 +746,12 @@ const CreateLesson = () => {
 			formData.append('image', file)
 
 			const token = await Cookies.get('token')
-			const { data } = await axios.post(
-				`http://localhost:4444/upload`,
-				formData,
-				{
-					headers: {
-						'Access-Control-Allow-Origin': '*',
-						Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIwZmQwNWVhNWY3YWRiNDMzYjg4OTYiLCJpYXQiOjE3MTM1MTE4NTAsImV4cCI6MTcxNjEwMzg1MH0.X2eYUjgR4w5OmyK-UxvyEqScPa1FXqee1q6t4YLF4lI`,
-					},
-				}
-			)
+			const { data } = await axios.post(`${__VALUE__}/upload`, formData, {
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					Authorization: `Bearer ${token}`,
+				},
+			})
 
 			setImageUrl(data.imagelink)
 		} catch (err) {

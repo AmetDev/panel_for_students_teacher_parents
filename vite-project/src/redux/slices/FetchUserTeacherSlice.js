@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 export const fetchMe = createAsyncThunk('me/fetchMeStatus', async () => {
-	const { data } = await axios.get(`http://localhost:4444/auth_teacher/me`, {
+	const token = await Cookies.get('token')
+	const { data } = await axios.get(`${__VALUE__}/auth_teacher/me`, {
 		headers: {
-			Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIwZmQwNWVhNWY3YWRiNDMzYjg4OTYiLCJpYXQiOjE3MTM1MTE4NTAsImV4cCI6MTcxNjEwMzg1MH0.X2eYUjgR4w5OmyK-UxvyEqScPa1FXqee1q6t4YLF4lI`,
+			Authorization: `Bearer ${token}`,
 		},
 	})
 	return data
