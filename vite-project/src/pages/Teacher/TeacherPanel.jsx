@@ -5,6 +5,7 @@ import style from './TeacherPanel.module.scss'
 const TeacherPanel = () => {
 	return (
 		<div className={style.wrapperPanelTeacher}>
+			<div></div>
 			<div className={style.wrapperPanelInfo}>
 				<HeaderInfo />
 			</div>
