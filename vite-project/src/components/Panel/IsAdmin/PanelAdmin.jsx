@@ -9,6 +9,7 @@ import question from '../../../assets/panelAdmin/question.svg'
 import removeChild from '../../../assets/panelAdmin/removeChild.svg'
 import style from './PanelAdmin.module.scss'
 const PanelAdmin = () => {
+	const switcherPages = () => {}
 	return (
 		<div className={style.wrapperPanel}>
 			<div className={style.wrapperIcon}>
