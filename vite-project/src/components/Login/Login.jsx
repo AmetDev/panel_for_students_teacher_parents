@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 import { fetchUser } from '../../redux/slices/CurrentlyUserSlice'
 import style from './Login.module.scss'
 const Login = () => {
@@ -18,7 +19,8 @@ const Login = () => {
 	const handlerStudent = () => {
 		setStudentState(!studentState)
 	}
-
+	const { me } = useSelector(state => state.fetchUser)
+	console.log('dta', me)
 	const handlerSubmit = e => {
 		e.preventDefault()
 		if (!email || !password) {
@@ -79,6 +81,7 @@ const Login = () => {
 					</div>
 				</div>
 				<button type='submit'>Войти</button>
+				{me.typeUser == 'teacher' && <Navigate to='/TeacherPanel' />}
 			</form>
 		</div>
 	)

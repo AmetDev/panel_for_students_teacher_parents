@@ -37,7 +37,7 @@ const initialState = {
 	user: [],
 	status: 'loading', //loading | success | error
 }
-const FetchMeSlice = createSlice({
+const FetchUser = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
@@ -62,6 +62,6 @@ const FetchMeSlice = createSlice({
 			})
 	},
 })
-export const { setUser } = FetchMeSlice.actions
-//export const selectorMenu = state => state.FetchMeSlice
-export default FetchMeSlice.reducer
+export const { setUser } = FetchUser.actions
+//export const selectorMenu = state => state.FetchUser
+export default FetchUser.reducer
