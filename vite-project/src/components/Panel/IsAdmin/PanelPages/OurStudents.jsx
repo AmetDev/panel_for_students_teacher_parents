@@ -1,5 +1,7 @@
 import React from 'react'
 
-export const OurStudents = () => {
+const OurStudents = () => {
 	return <div>OurStudents</div>
 }
+
+export default OurStudents

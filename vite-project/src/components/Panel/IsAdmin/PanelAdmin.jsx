@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import style from './PanelAdmin.module.scss'
+
+import { useDispatch } from 'react-redux'
 import day from '../../../assets/day.svg'
 import addChild from '../../../assets/panelAdmin/addChild.svg'
 import chart from '../../../assets/panelAdmin/chart.svg'
@@ -7,43 +10,43 @@ import doc from '../../../assets/panelAdmin/doc.svg'
 import home from '../../../assets/panelAdmin/home.svg'
 import question from '../../../assets/panelAdmin/question.svg'
 import removeChild from '../../../assets/panelAdmin/removeChild.svg'
-import style from './PanelAdmin.module.scss'
+import { setPage } from '../../../redux/slices/SelectedPageTeacherSlice'
+
 const PanelAdmin = () => {
-	const switcherPages = () => {}
+	const dispatch = useDispatch()
+	const initialState = [
+		{ icon: home, label: 'Панель учителя', state: false },
+		{ icon: chart, label: 'статистика', state: false },
+		{ icon: question, label: 'создание теста', state: false },
+		{ icon: doc, label: 'создание урока', state: false },
+		{ icon: childs, label: 'Ваши ученики', state: false },
+		{ icon: addChild, label: 'Добавить ученика', state: false },
+		{ icon: removeChild, label: 'Убрать ученика', state: false },
+	]
+
+	const [buttons, setButtons] = useState(initialState)
+
+	const toggleButtonState = index => {
+		//		setButtons(newButtons)
+		dispatch(setPage(initialState[index]))
+	}
+
 	return (
 		<div className={style.wrapperPanel}>
 			<div className={style.wrapperIcon}>
 				<img src={day} alt='' />
 				<span>ДАЙ ПЯТЬ!</span>
 			</div>
-			<button className={style.btnPanel}>
-				<img src={home} alt='' srcset='' />
-				<span>Панель учителя</span>
-			</button>
-			<button className={style.btnPanel}>
-				<img src={chart} alt='' srcset='' />
-				<span>статистика</span>
-			</button>
-			<button className={style.btnPanel}>
-				<img src={question} alt='' srcset='' />
-				<span>создание теста</span>
-			</button>
-			<button className={style.btnPanel}>
-				<img src={doc} alt='' srcset='' />
-				<span>создание урока</span>
-			</button>
-			<button className={style.btnPanel}>
-				<img src={childs} alt='' srcset='' />
-				<span>Ваши ученики</span>
-			</button>
-			<button className={style.btnPanel}>
-				<img src={addChild} alt='' srcset='' />
-				<span>Добавить ученика</span>
-			</button>
-			<button className={style.btnPanel}>
-				<img src={removeChild} alt='' srcset='' />
-				<span>Убрать ученика</span>
-			</button>
+			{buttons.map((button, index) => (
+				<button
+					key={index}
+					onClick={() => toggleButtonState(index)}
+					className={style.btnPanel}
+				>
+					<img src={button.icon} alt='' />
+					<span>{button.label}</span>
+				</button>
+			))}
 		</div>
 	)
 }
