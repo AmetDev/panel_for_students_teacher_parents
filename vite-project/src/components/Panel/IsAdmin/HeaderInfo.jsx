@@ -5,34 +5,17 @@ import test from '../../../assets/test.svg'
 import User from '../../../assets/user.png'
 import { fetchMe } from '../../../redux/slices/FetchUserTeacherSlice'
 import style from './HeaderInfo.module.scss'
-//import { createSelector } from '@reduxjs/toolkit'
+
 const HeaderInfo = () => {
-	//const [me, setMe] = useState(null)
 	const dispatch = useDispatch()
 	useEffect(() => {
-		// const fetchMe = async () => {
-		// 	try {
-		// 		const response = await axios.get(
-		// 			`http://localhost:4444/auth_teacher/me`,
-		// 			{
-		// 				headers: {
-		// 					Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIwZmQwNWVhNWY3YWRiNDMzYjg4OTYiLCJpYXQiOjE3MTM1MTE4NTAsImV4cCI6MTcxNjEwMzg1MH0.X2eYUjgR4w5OmyK-UxvyEqScPa1FXqee1q6t4YLF4lI`,
-		// 				},
-		// 			}
-		// 		)
-		// 		console.log(response)
-		// 		setMe(response.data)
-		// 	} catch (error) {
-		// 		setMe(null)
-		// 	}
-		// }
-		// fetchMe()
 		dispatch(fetchMe())
 	}, [])
 	const { me, status } = useSelector(state => state.fetchUser)
 	console.log(me)
 	return (
-		status === 'success' && (
+		status === 'success' &&
+		me.isTeacher && (
 			<div className={style.HeaderInfo}>
 				<div className={style.userWrapper}>
 					<div>

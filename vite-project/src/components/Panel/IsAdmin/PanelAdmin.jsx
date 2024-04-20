@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './PanelAdmin.module.scss'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import day from '../../../assets/day.svg'
 import addChild from '../../../assets/panelAdmin/addChild.svg'
 import chart from '../../../assets/panelAdmin/chart.svg'
@@ -10,6 +10,7 @@ import doc from '../../../assets/panelAdmin/doc.svg'
 import home from '../../../assets/panelAdmin/home.svg'
 import question from '../../../assets/panelAdmin/question.svg'
 import removeChild from '../../../assets/panelAdmin/removeChild.svg'
+import { fetchMe } from '../../../redux/slices/FetchUserTeacherSlice'
 import { setPage } from '../../../redux/slices/SelectedPageTeacherSlice'
 
 const PanelAdmin = () => {
@@ -30,24 +31,34 @@ const PanelAdmin = () => {
 		//		setButtons(newButtons)
 		dispatch(setPage(initialState[index]))
 	}
+	const { pages } = useSelector(state => state.teacherSelectedPage)
+
+	useEffect(() => {
+		dispatch(fetchMe())
+	}, [])
+	const { me, status } = useSelector(state => state.fetchUser)
+	console.log(me)
 
 	return (
-		<div className={style.wrapperPanel}>
-			<div className={style.wrapperIcon}>
-				<img src={day} alt='' />
-				<span>ДАЙ ПЯТЬ!</span>
+		status === 'success' &&
+		me.isTeacher && (
+			<div className={style.wrapperPanel}>
+				<div className={style.wrapperIcon}>
+					<img src={day} alt='' />
+					<span>ДАЙ ПЯТЬ!</span>
+				</div>
+				{buttons.map((button, index) => (
+					<button
+						key={index}
+						onClick={() => toggleButtonState(index)}
+						className={style.btnPanel}
+					>
+						<img src={button.icon} alt='' />
+						<span>{button.label}</span>
+					</button>
+				))}
 			</div>
-			{buttons.map((button, index) => (
-				<button
-					key={index}
-					onClick={() => toggleButtonState(index)}
-					className={style.btnPanel}
-				>
-					<img src={button.icon} alt='' />
-					<span>{button.label}</span>
-				</button>
-			))}
-		</div>
+		)
 	)
 }
 
