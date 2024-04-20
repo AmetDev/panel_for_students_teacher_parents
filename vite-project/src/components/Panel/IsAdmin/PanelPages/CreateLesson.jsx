@@ -63,14 +63,18 @@ const CreateLesson = () => {
 		fetchingData()
 	}, [isForm])
 	const RenderAll = () => {
-		return <Interweave content={textValue} />
+		return (
+			<div style={{ backgroundColor: '#fff', marginTop: '10px' }}>
+				<Interweave content={textValue} />
+			</div>
+		)
 	}
 	const RenderPredImage = ({ imageUrl }) => {
 		return (
 			<Interweave
 				content={`<img style="max-width:100%, height: auto;" src=${
 					`http://localhost:4444` + `${imageUrl}`
-				}  alt="name"/>`}
+				} width="150" height"auto"  alt="name"/>`}
 			/>
 		)
 	}
@@ -585,9 +589,9 @@ const CreateLesson = () => {
 			console.log(data.imagelink)
 			setDataUrl(data.imagelink)
 			setImageContentUrl(
-				`<img style="max-width:100%, height: auto;" src=${
+				`<img src=${
 					`${__VALUE__}` + `${data.imagelink}`
-				}  alt="name"/>`
+				} width="150" height"auto" alt="name"/>`
 			)
 		} catch (err) {
 			console.log(err)

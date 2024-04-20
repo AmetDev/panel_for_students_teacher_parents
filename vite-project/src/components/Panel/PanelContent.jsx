@@ -5,7 +5,7 @@ import Chart from '../../components/Panel/IsAdmin/PanelPages/Chart'
 import CreateLesson from '../../components/Panel/IsAdmin/PanelPages/CreateLesson'
 import CreateTest from '../../components/Panel/IsAdmin/PanelPages/CreateTest'
 import OurStudents from '../../components/Panel/IsAdmin/PanelPages/OurStudents'
-import PanelTeacher from '../../components/Panel/IsAdmin/PanelPages/PanelTeacher'
+import PanelTeacher from '../../components/Panel/IsAdmin/PanelPages/PanelTeacher/PanelTeacher'
 import RemoveStudent from '../../components/Panel/IsAdmin/PanelPages/RemoveStudent'
 
 const PanelContent = () => {
