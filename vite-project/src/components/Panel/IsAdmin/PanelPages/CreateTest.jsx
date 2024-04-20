@@ -1,9 +1,10 @@
+import axios from 'axios'
+import Cookies from 'js-cookie'
 import React, { useState } from 'react'
-
 const CreateTest = () => {
 	const [testName, setTestName] = useState('')
 	const [questions, setQuestions] = useState([
-		{ question: '', answers: [{ text: '', isCorrect: false }] },
+		{ question: '', answers: [{ image: null, isCorrect: false }] },
 	])
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 
@@ -13,10 +14,26 @@ const CreateTest = () => {
 		setQuestions(newQuestions)
 	}
 
-	const handleAnswerChange = (questionIndex, answerIndex, value) => {
-		const newQuestions = [...questions]
-		newQuestions[questionIndex].answers[answerIndex].text = value
-		setQuestions(newQuestions)
+	const handleImageChange = async (questionIndex, answerIndex, file) => {
+		const formData = new FormData()
+		formData.append('image', file)
+
+		try {
+			const token = await Cookies.get('token')
+
+			const response = await axios.post(`${__VALUE__}/upload`, formData, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			})
+			const imageUrl = response.data.imagelink
+			console.log(response.data)
+			const newQuestions = [...questions]
+			newQuestions[questionIndex].answers[answerIndex].image = imageUrl
+			setQuestions(newQuestions)
+		} catch (error) {
+			console.error('Error uploading image:', error)
+		}
 	}
 
 	const toggleCorrectAnswer = (questionIndex, answerIndex) => {
@@ -30,13 +47,13 @@ const CreateTest = () => {
 	const addQuestion = () => {
 		setQuestions([
 			...questions,
-			{ question: '', answers: [{ text: '', isCorrect: false }] },
+			{ question: '', answers: [{ image: null, isCorrect: false }] },
 		])
 	}
 
 	const addAnswer = questionIndex => {
 		const newQuestions = [...questions]
-		newQuestions[questionIndex].answers.push({ text: '', isCorrect: false })
+		newQuestions[questionIndex].answers.push({ image: null, isCorrect: false })
 		setQuestions(newQuestions)
 	}
 
@@ -57,7 +74,6 @@ const CreateTest = () => {
 			testName: testName,
 			questions: questions,
 		}
-		// Do something with the test object, like sending it to an API or storing it
 		console.log(test)
 	}
 
@@ -108,10 +124,9 @@ const CreateTest = () => {
 						{q.answers.map((a, aIndex) => (
 							<div key={aIndex}>
 								<input
-									type='text'
-									value={a.text}
+									type='file'
 									onChange={e =>
-										handleAnswerChange(qIndex, aIndex, e.target.value)
+										handleImageChange(qIndex, aIndex, e.target.files[0])
 									}
 								/>
 								<button onClick={() => toggleCorrectAnswer(qIndex, aIndex)}>
