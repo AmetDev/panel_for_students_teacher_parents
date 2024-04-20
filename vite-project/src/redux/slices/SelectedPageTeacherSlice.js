@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-	pages: {},
+	pages: { label: 'Панель учителя', state: false },
 }
 //
 const selectedPageTeacher = createSlice({

@@ -14,7 +14,7 @@ const PanelTeacher = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(setPages([]))
+		dispatch(setPages())
 		dispatch(fetchPages())
 	}, [])
 
@@ -31,7 +31,7 @@ const PanelTeacher = () => {
 			})
 			console.log(result)
 			// Перезагрузить список страниц
-			dispatch(setPages([]))
+			dispatch(setPages())
 			dispatch(fetchPages())
 		} catch (error) {
 			console.log(error)
@@ -47,10 +47,10 @@ const PanelTeacher = () => {
 				{dataPage.length !== 0 &&
 					dataPage.map(element => {
 						return (
-							<div key={element._id}>
+							<div key={element.pageUrl}>
 								<div>
 									<div className={style.wrapperTtitleAndButton}>
-										<Link to={`/TeacherPanel/PanelTeacher/${element.pageUrl}`}>
+										<Link to={`/PanelTeacher/${element.pageUrl}`}>
 											{' '}
 											{element.pageTitle}
 										</Link>

@@ -27,8 +27,9 @@ const FullDataPage = () => {
 	}, [dataOnePage])
 
 	useEffect(() => {
+		dispatch(setPages())
 		dispatch(fetchOneLesson(data.id))
-		dispatch(setPages([]))
+		dispatch(setPages())
 	}, [])
 	console.log(result2)
 

@@ -4,16 +4,18 @@ import Cookies from 'js-cookie'
 
 export const fetchMe = createAsyncThunk('me/fetchMeStatus', async () => {
 	const token = await Cookies.get('token')
+	console.log('Fetching with token:', token) // Добавьте логирование
 	const { data } = await axios.get(`${__VALUE__}/auth_teacher/me`, {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
 	})
+	console.log('Fetched data:', data) // Добавьте логирование
 	return data
 })
 
 const initialState = {
-	me: [],
+	me: {},
 	status: 'loading', //loading | success | error
 }
 const FetchMeSlice = createSlice({
@@ -28,7 +30,7 @@ const FetchMeSlice = createSlice({
 		builder
 			.addCase(fetchMe.pending, (state, action) => {
 				state.status = 'loading'
-				state.me = []
+				state.me = {}
 			})
 			.addCase(fetchMe.fulfilled, (state, action) => {
 				console.log('ok', state)
@@ -37,7 +39,7 @@ const FetchMeSlice = createSlice({
 			})
 			.addCase(fetchMe.rejected, (state, action) => {
 				state.status = 'error'
-				state.me = []
+				state.me = {}
 			})
 	},
 })

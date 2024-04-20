@@ -1,24 +1,24 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { Navigate } from 'react-router-dom'
-import TeacherPanel from '../pages/Teacher/TeacherPanel'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate, Outlet } from 'react-router-dom'
 import { fetchMe } from '../redux/slices/FetchUserTeacherSlice'
+
 const PrivateRoute = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
+		console.log('Dispatching fetchMe')
 		dispatch(fetchMe())
 	}, [])
 
 	const { me, status } = useSelector(state => state.fetchUser)
-	console.log(me)
+	console.log('me', me)
 	console.log('is work')
 	console.log(status)
-	return status === 'success' && me.isTeacher === true ? (
-		<TeacherPanel />
-	) : (
-		<Navigate to='/' />
-	)
+
+	// let isTeacher = false
+
+	return me ? <Outlet /> : <Navigate to='/login' />
 }
 
 export default PrivateRoute

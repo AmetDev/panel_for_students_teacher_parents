@@ -20,12 +20,13 @@ const FetchLessonSlice = createSlice({
 	initialState,
 	reducers: {
 		setPages(state, action) {
-			state.dataPage = action.payload
+			state.dataPage = []
 		},
 	},
 	extraReducers: builder => {
 		builder
 			.addCase(fetchPages.pending, (state, action) => {
+				state.dataPage = []
 				state.status = 'loading'
 			})
 			.addCase(fetchPages.fulfilled, (state, action) => {
@@ -34,6 +35,7 @@ const FetchLessonSlice = createSlice({
 				state.status = 'success'
 			})
 			.addCase(fetchPages.rejected, (state, action) => {
+				state.dataPage = []
 				state.status = 'error'
 			})
 	},

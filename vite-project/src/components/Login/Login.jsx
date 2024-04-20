@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { fetchUser } from '../../redux/slices/CurrentlyUserSlice'
 import style from './Login.module.scss'
+
 const Login = () => {
 	const [teacherState, setTeacherState] = useState(false)
 	const [parentState, setParentState] = useState(false)
@@ -81,7 +82,9 @@ const Login = () => {
 					</div>
 				</div>
 				<button type='submit'>Войти</button>
-				{me.typeUser == 'teacher' && <Navigate to='/TeacherPanel' />}
+				{me && me.typeUser == 'teacher' && me.isTeacher == true && (
+					<Navigate to='/TeacherPanel' />
+				)}
 			</form>
 		</div>
 	)
