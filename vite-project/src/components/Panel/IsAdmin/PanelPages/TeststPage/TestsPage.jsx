@@ -2,11 +2,13 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import deleteIcon from '../../../../../assets/panelAdmin/adminicons/deleteicon.svg'
 import { setPages } from '../../../../../redux/slices/FetchLessonSlice'
 import style from '../TestPage.module.scss'
+
 const TestList = () => {
+	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [tests, setTests] = useState([])
 	const [teacher, setTeacher] = useState(null)
@@ -74,6 +76,9 @@ const TestList = () => {
 							))}
 						</ul>
 					</div>
+					<button className={style.btnStyle} onClick={() => navigate(-1)}>
+						Вернуться назад
+					</button>
 				</div>
 			)
 		)

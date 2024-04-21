@@ -1,7 +1,6 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
-import deleteIcon from '../../../../assets/panelAdmin/adminicons/deleteicon.svg'
 import user from '../../../../assets/user.png'
 import style from './OurStudents.module.scss'
 const OurStudents = () => {
@@ -51,9 +50,9 @@ const OurStudents = () => {
 										<span>{element.email}</span>
 									</div>
 								</div>
-								<button className={style.btnDelete}>
+								{/* <button className={style.btnDelete}>
 									<img src={deleteIcon} alt='delete student' />
-								</button>
+								</button> */}
 							</div>
 						)
 					})}

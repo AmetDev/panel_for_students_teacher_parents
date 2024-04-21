@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import day from '../../../assets/day.svg'
 import addChild from '../../../assets/panelAdmin/addChild.svg'
 import addChild2 from '../../../assets/panelAdmin/addChild2.svg'
-import chart from '../../../assets/panelAdmin/chart.svg'
-import chart2 from '../../../assets/panelAdmin/chart2.svg'
 import childs from '../../../assets/panelAdmin/childs.svg'
 import childs2 from '../../../assets/panelAdmin/childs2.svg'
 import doc from '../../../assets/panelAdmin/doc.svg'
@@ -15,15 +13,13 @@ import home from '../../../assets/panelAdmin/home.svg'
 import home2 from '../../../assets/panelAdmin/home2.svg'
 import question from '../../../assets/panelAdmin/question.svg'
 import question2 from '../../../assets/panelAdmin/question2.svg'
-import removeChild from '../../../assets/panelAdmin/removeChild.svg'
-import removeChild2 from '../../../assets/panelAdmin/removeChild2.svg'
 import { setPage } from '../../../redux/slices/SelectedPageTeacherSlice'
 
 const PanelAdmin = () => {
 	const dispatch = useDispatch()
 	const initialState = [
 		{ icon: home, icon2: home2, label: 'Панель учителя', state: false },
-		{ icon: chart, icon2: chart2, label: 'статистика', state: false },
+
 		{ icon: question, icon2: question2, label: 'создание теста', state: false },
 		{ icon: doc, icon2: doc2, label: 'создание урока', state: false },
 		{ icon: childs, icon2: childs2, label: 'Ваши ученики', state: false },
@@ -31,12 +27,6 @@ const PanelAdmin = () => {
 			icon: addChild,
 			icon2: addChild2,
 			label: 'Добавить ученика',
-			state: false,
-		},
-		{
-			icon: removeChild,
-			icon2: removeChild2,
-			label: 'Убрать ученика',
 			state: false,
 		},
 	]
