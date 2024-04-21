@@ -1,0 +1,22 @@
+.wrapperTestLanding {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	font-weight: 600;
+
+	color: #d660cc;
+	ul {
+		background-color: #ffffffb4;
+		padding: 15px;
+		border-radius: 10px;
+		li {
+			display: flex;
+			justify-content: space-between;
+			background-color: #fff;
+			padding: 5px;
+			border-radius: 8px;
+			margin: 10px;
+			list-style-type: circle;
+		}
+	}
+}

@@ -1,5 +1,7 @@
 .HeaderInfo {
+	position: absolute;
 	width: 90%;
+	z-index: 1;
 	height: 113px;
 	display: flex;
 	justify-content: space-between;
@@ -55,9 +57,7 @@
 			padding-left: 10px;
 			padding-right: 10px;
 			border-radius: 20px;
-			&:last-of-type {
-				background-color: #fff;
-			}
+
 			img {
 				width: 20px;
 				height: 20px;
@@ -74,4 +74,7 @@
 			}
 		}
 	}
+}
+.active {
+	background-color: #fff;
 }

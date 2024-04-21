@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import lesson from '../../../assets/lesson.svg'
 import test from '../../../assets/test.svg'
 import User from '../../../assets/user.png'
@@ -8,11 +9,15 @@ import style from './HeaderInfo.module.scss'
 
 const HeaderInfo = () => {
 	const dispatch = useDispatch()
+	const [activeItem, setActiveItem] = useState('lessons') // Состояние для хранения текущего активного элемента
+
 	useEffect(() => {
 		dispatch(fetchMe())
 	}, [])
+
 	const { me, status } = useSelector(state => state.fetchUser)
 	console.log(me)
+
 	return (
 		status === 'success' &&
 		me.isTeacher && (
@@ -27,13 +32,17 @@ const HeaderInfo = () => {
 					</div>
 				</div>
 				<div className={style.WrapperSwitcher}>
-					<div>
+					<div className={activeItem === 'lessons' ? style.active : ''}>
 						<img src={lesson} alt='' />
-						<button>Уроки</button>
+						<button onClick={() => setActiveItem('lessons')}>
+							<Link to='/TeacherPanel'>Уроки</Link>
+						</button>
 					</div>
-					<div>
+					<div className={activeItem === 'tests' ? style.active : ''}>
 						<img src={test} alt='' />
-						<button>Тесты</button>
+						<button onClick={() => setActiveItem('tests')}>
+							<Link to='/TeacherPanel/tests'>Тесты</Link>
+						</button>
 					</div>
 				</div>
 			</div>

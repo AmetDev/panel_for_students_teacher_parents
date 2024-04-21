@@ -2,6 +2,8 @@ import { Route, Routes } from 'react-router-dom'
 import '../src/scss/index.scss'
 import Login from './components/Login/Login'
 import FullDataPage from './components/Panel/IsAdmin/PanelPages/PanelTeacher/[PanelTeacherId]/FullDataPage'
+import TestDetail from './components/Panel/IsAdmin/PanelPages/TeststPage/[TestId]/Test'
+import TestList from './components/Panel/IsAdmin/PanelPages/TeststPage/TestsPage'
 import MainLayouts from './Layouts/MainLayouts'
 import PrivateRoute from './Layouts/PrivateRoute'
 function App() {
@@ -11,6 +13,8 @@ function App() {
 				<Route path='/login' element={<Login />} />
 				<Route element={<PrivateRoute />}>
 					<Route path='/TeacherPanel' element={<MainLayouts />} />
+					<Route path='/TeacherPanel/tests' element={<TestList />} />
+					<Route path='/TeacherPanel/tests/:id' element={<TestDetail />} />
 				</Route>
 				<Route path='/PanelTeacher/:id' element={<FullDataPage />} />
 			</Routes>

@@ -3,15 +3,19 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 export const fetchMe = createAsyncThunk('me/fetchMeStatus', async () => {
-	const token = await Cookies.get('token')
-	console.log('Fetching with token:', token) // Добавьте логирование
-	const { data } = await axios.get(`${__VALUE__}/auth_teacher/me`, {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	})
-	console.log('Fetched data:', data) // Добавьте логирование
-	return data
+	try {
+		const token = await Cookies.get('token')
+		console.log('Fetching with token:', token) // Добавьте логирование
+		const { data } = await axios.get(`${__VALUE__}/auth_teacher/me`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		console.log('Fetched data:', data) // Добавьте логирование
+		return data
+	} catch (error) {
+		return error
+	}
 })
 
 const initialState = {
