@@ -3,13 +3,19 @@ import axios from 'axios'
 
 export const fetchOneLesson = createAsyncThunk(
 	'getonepage/fetchOnePageStatus',
-	async counter => {
-		const { data } = await axios.get(`${__VALUE__}/page/getonepage`, {
-			params: {
-				url: counter,
-			},
-		})
-		return data.result
+	async obj => {
+		try {
+			console.log('Teacher_uuid', obj)
+			const { data } = await axios.get(`${__VALUE__}/page/getonepage`, {
+				params: {
+					url: obj.counter,
+					Teacher_uuid: obj.Teacher_uuid,
+				},
+			})
+			return data.result
+		} catch (error) {
+			console.log(error)
+		}
 	}
 )
 

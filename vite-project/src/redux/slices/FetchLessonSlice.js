@@ -3,8 +3,12 @@ import axios from 'axios'
 
 export const fetchPages = createAsyncThunk(
 	'pages/fetchPagesStatus',
-	async () => {
-		const { data } = await axios.get(`${__VALUE__}/page/pages`)
+	async Teacher_uuid => {
+		const { data } = await axios.get(`${__VALUE__}/page/pages`, {
+			params: {
+				Teacher_uuid,
+			},
+		})
 
 		return data.result
 	}
@@ -21,6 +25,7 @@ const FetchLessonSlice = createSlice({
 	reducers: {
 		setPages(state, action) {
 			state.dataPage = []
+			state.status = 'success'
 		},
 	},
 	extraReducers: builder => {
@@ -31,7 +36,7 @@ const FetchLessonSlice = createSlice({
 			})
 			.addCase(fetchPages.fulfilled, (state, action) => {
 				// Добавление новых данных к существующему массиву
-				state.dataPage = [...state.dataPage, ...action.payload]
+				state.dataPage = action.payload
 				state.status = 'success'
 			})
 			.addCase(fetchPages.rejected, (state, action) => {

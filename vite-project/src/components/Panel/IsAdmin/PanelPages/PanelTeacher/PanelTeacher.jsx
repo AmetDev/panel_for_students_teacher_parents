@@ -14,10 +14,33 @@ const PanelTeacher = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(setPages())
-		dispatch(fetchPages())
-	}, [])
+		const fetchData = async () => {
+			try {
+				const token = await Cookies.get('token')
+				const { data } = await axios.get(`${__VALUE__}/auth_teacher/me`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
+				return data
+			} catch (error) {
+				console.log(error)
+				return null
+			}
+		}
 
+		const initializeData = async () => {
+			const result = await fetchData()
+			if (result) {
+				console.log('result', result)
+
+				dispatch(fetchPages(result._id))
+				dispatch(setPages())
+			}
+		}
+
+		initializeData()
+	}, [])
 	const deletePage = async id => {
 		try {
 			const token = await Cookies.get('token')

@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { setPages } from '../../../../../../redux/slices/FetchLessonSlice'
 import { fetchOneLesson } from '../../../../../../redux/slices/FetchOneLessonSlice'
-import style from './FullDataPage.module.scss'
+import style from './PanelLesson.module.scss'
 
-const FullDataPage = () => {
+const PanelLesson = () => {
 	const data = useParams()
 	const dispatch = useDispatch()
 	const { dataOnePage } = useSelector(state => state.dataOnePageSlice)
@@ -21,7 +21,7 @@ const FullDataPage = () => {
 			try {
 				const token = await Cookies.get('token')
 				console.log('Fetching with token:', token) // Добавьте логирование
-				const { data } = await axios.get(`${__VALUE__}/auth_teacher/me`, {
+				const { data } = await axios.get(`${__VALUE__}/auth_student/me`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
@@ -35,7 +35,7 @@ const FullDataPage = () => {
 		const initializeData = async () => {
 			const result = await fetchTeacher()
 			console.log('resulttt', result)
-			const object = { Teacher_uuid: result._id, counter: data.id }
+			const object = { Teacher_uuid: result.Teacher_uuid, counter: data.id }
 			dispatch(fetchOneLesson(object))
 			dispatch(setPages())
 		}
@@ -72,4 +72,4 @@ const FullDataPage = () => {
 	)
 }
 
-export default FullDataPage
+export default PanelLesson

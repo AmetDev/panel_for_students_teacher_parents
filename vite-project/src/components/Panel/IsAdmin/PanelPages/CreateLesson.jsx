@@ -582,7 +582,6 @@ const CreateLesson = () => {
 			console.log(formData)
 			const { data } = await axios.post(`${__VALUE__}/upload`, formData, {
 				headers: {
-					'Access-Control-Allow-Origin': '*',
 					Authorization: `Bearer ${token}`,
 				},
 			})
@@ -716,7 +715,7 @@ const CreateLesson = () => {
 			console.log('resultText', resultText)
 
 			const cleanedHtml = removeLocalhostFromHref(resultText)
-
+			console.log('tokenteacher', token)
 			const someDate = await axios.put(
 				`${__VALUE__}/page/topublic`,
 				{ URLPage, textValue: cleanedHtml },

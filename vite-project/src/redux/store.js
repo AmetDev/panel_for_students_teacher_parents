@@ -3,6 +3,7 @@ import undoable from 'redux-undo'
 import FetchLessonSlice from './slices/FetchLessonSlice'
 import FetchOneLessonSlice from './slices/FetchOneLessonSlice'
 import FetchMeSlice from './slices/FetchUserTeacherSlice.js'
+import SelectedPageStudentSlice from './slices/SelectedPageStudentSlice'
 import selectedPageTeacher from './slices/SelectedPageTeacherSlice.js'
 import counterSlice from './slices/UndoRendoSlice.js'
 export const store = configureStore({
@@ -12,5 +13,6 @@ export const store = configureStore({
 		counter: undoable(counterSlice),
 		dataPages: FetchLessonSlice,
 		dataOnePageSlice: FetchOneLessonSlice,
+		studentSelectedPage: SelectedPageStudentSlice,
 	},
 })

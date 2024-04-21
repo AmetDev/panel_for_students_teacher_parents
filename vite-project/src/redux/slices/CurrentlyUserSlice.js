@@ -3,7 +3,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 export const fetchUser = createAsyncThunk('me/fetchMeStatus', async obj => {
-	if (obj.teacherState) {
+	if (obj.userType == 'teacher') {
 		const { data } = await axios.post(`${__VALUE__}/auth_teacher/login`, {
 			email: obj.email,
 			password: obj.password,
@@ -12,7 +12,7 @@ export const fetchUser = createAsyncThunk('me/fetchMeStatus', async obj => {
 		Cookies.set('token', data.token, { expires: 7 })
 		return data
 	}
-	if (obj.parentState) {
+	if (obj.userType === 'parent') {
 		const { data } = await axios.post(`${__VALUE__}/auth_parent/login`, {
 			email: obj.email,
 			password: obj.password,
@@ -21,7 +21,7 @@ export const fetchUser = createAsyncThunk('me/fetchMeStatus', async obj => {
 		Cookies.set('token', data.token, { expires: 7 })
 		return data
 	}
-	if (obj.studentState) {
+	if (obj.userType === 'student') {
 		const { data } = await axios.post(`${__VALUE__}/auth_student/login`, {
 			email: obj.email,
 			password: obj.password,
