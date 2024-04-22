@@ -1,11 +1,41 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
-
+import usericon from '../../../../../assets/user.png'
+import style from './OurParent.module.scss'
 const OurParent = () => {
 	const [hasParentUuid, setHasParentUuid] = useState(false)
 	const [parentData, setParentData] = useState(null)
-
+	const deleteTeacher = async () => {
+		try {
+			const token = await Cookies.get('token')
+			const data1 = await axios.get(`${__VALUE__}/auth_student/me`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			})
+			console.log(data1.data.email)
+			if (data1.data) {
+				console.log('issadodidfasiodu')
+				const token = await Cookies.get('token')
+				const { data } = await axios.put(
+					`${__VALUE__}/auth_student/studentparent`,
+					{
+						email: data1.data.email,
+						Teacher_uuid: null,
+					},
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				)
+				console.log(data)
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
 	useEffect(() => {
 		const fetchMeOne = async () => {
 			try {
@@ -51,19 +81,31 @@ const OurParent = () => {
 	}, [])
 
 	return (
-		<div>
-			{hasParentUuid ? (
+		<div className={style.wrapperOurTeacher}>
+			{parentData ? (
 				<div>
-					<span>Parent_uuid существует</span>
-					{parentData && (
+					<div className={style.wrapperOur}>
 						<div>
-							<span>Имя родителя: {parentData.fullName}</span>
-							<span>Email родителя: {parentData.email}</span>
+							<img src={usericon} width={'32px'} height={'32px'} alt='user' />
 						</div>
-					)}
+						<div>
+							<span>{parentData.fullName}</span>
+							<span>{parentData.email}</span>
+						</div>
+					</div>
+					<button
+						onClick={() => {
+							let isClicked = confirm('Вы действительно хотите удалить?')
+							if (isClicked) {
+								deleteTeacher()
+							}
+						}}
+					>
+						удалить
+					</button>
 				</div>
 			) : (
-				<span>Parent_uuid не существует</span>
+				<span>Вы не добавили родителя</span>
 			)}
 		</div>
 	)

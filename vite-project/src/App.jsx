@@ -1,14 +1,16 @@
 import { Route, Routes } from 'react-router-dom'
 import '../src/scss/index.scss'
-import Login from './components/Login/Login'
-import FullDataPage from './components/Panel/IsAdmin/PanelPages/PanelTeacher/[PanelTeacherId]/FullDataPage'
-import TestDetail from './components/Panel/IsAdmin/PanelPages/TeststPage/[TestId]/Test'
-import TestList from './components/Panel/IsAdmin/PanelPages/TeststPage/TestsPage'
-import PanelLesson from './components/PanelStudent/components/PanelStudent/pages/[PanelStudentInnerId]/PanelLesson'
-import StudentPanel from './components/PanelStudent/components/PanelStudent/studentPanel'
-import MainPageStudent from './components/PanelStudent/MainPageStudent'
 import MainLayouts from './Layouts/MainLayouts'
 import PrivateRoute from './Layouts/PrivateRoute'
+import Login from './components/Login/Login'
+import FullDataPage from './components/Panel/IsAdmin/PanelPages/PanelTeacher/[PanelTeacherId]/FullDataPage'
+import TestList from './components/Panel/IsAdmin/PanelPages/TeststPage/TestsPage'
+import TestDetail from './components/Panel/IsAdmin/PanelPages/TeststPage/[TestId]/Test'
+import MainPageStudent from './components/PanelStudent/MainPageStudent'
+import TestListStudent from './components/PanelStudent/components/PanelStudent/pages/TestsPage'
+import PanelLesson from './components/PanelStudent/components/PanelStudent/pages/[PanelStudentInnerId]/PanelLesson'
+import TestDetailStudent from './components/PanelStudent/components/PanelStudent/pages/[TestsPageId]/TestDetailStudent'
+import StudentPanel from './components/PanelStudent/components/PanelStudent/studentPanel'
 function App() {
 	return (
 		<>
@@ -17,6 +19,11 @@ function App() {
 				<Route path='/student' element={<MainPageStudent />}>
 					<Route path='/student/panel' element={<StudentPanel />} />
 					<Route path='/student/panel/lessons/:id' element={<PanelLesson />} />
+					<Route path='/student/panel/tests/' element={<TestListStudent />} />
+					<Route
+						path='/student/panel/tests/:id'
+						element={<TestDetailStudent />}
+					/>
 				</Route>
 				<Route element={<PrivateRoute />}>
 					<Route path='/TeacherPanel' element={<MainLayouts />} />
