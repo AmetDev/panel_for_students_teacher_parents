@@ -6,6 +6,8 @@ import Login from './components/Login/Login'
 import FullDataPage from './components/Panel/IsAdmin/PanelPages/PanelTeacher/[PanelTeacherId]/FullDataPage'
 import TestList from './components/Panel/IsAdmin/PanelPages/TeststPage/TestsPage'
 import TestDetail from './components/Panel/IsAdmin/PanelPages/TeststPage/[TestId]/Test'
+import MainPageParent from './components/PanelParent/MainPageParent'
+import ParentPanel from './components/PanelParent/ParentPanel'
 import MainPageStudent from './components/PanelStudent/MainPageStudent'
 import TestListStudent from './components/PanelStudent/components/PanelStudent/pages/TestsPage'
 import PanelLesson from './components/PanelStudent/components/PanelStudent/pages/[PanelStudentInnerId]/PanelLesson'
@@ -24,6 +26,9 @@ function App() {
 						path='/student/panel/tests/:id'
 						element={<TestDetailStudent />}
 					/>
+				</Route>
+				<Route path='/parent' element={<MainPageParent />}>
+					<Route path='/parent/panel' element={<ParentPanel />} />
 				</Route>
 				<Route element={<PrivateRoute />}>
 					<Route path='/TeacherPanel' element={<MainLayouts />} />

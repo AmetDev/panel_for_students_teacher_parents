@@ -100,6 +100,7 @@ const Login = () => {
 					<Navigate to='/TeacherPanel' />
 				)}
 				{me && me.typeUser === 'student' && <Navigate to='/student/panel' />}
+				{me && me.typeUser === 'parent' && <Navigate to='/parent/panel' />}
 			</form>
 		</div>
 	)
